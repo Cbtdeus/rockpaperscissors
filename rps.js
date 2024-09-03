@@ -1,8 +1,10 @@
 
 humanScore = 0
 computerScore = 0
-
-
+roundCount = 0
+const div = document.querySelector("div")
+const computerScoreDiv = document.querySelector(".computerScore")
+const humanScoreDiv = document.querySelector(".humanScore")
 
 function getComputerChoice() {
     randomNumber = Math.random() * 3
@@ -12,23 +14,41 @@ function getComputerChoice() {
         return "paper"}
     return "scissors"
 }
-
+    
 
 function getHumanChoice() {
-    return prompt("Choose your destiny").toLowerCase()
+   rock = document.createElement("button")
+   rock.textContent = "Rock"
+   rock.addEventListener("click", () =>{
+    playRound("rock", getComputerChoice())
+   })
+   div.appendChild(rock)
+   paper = document.createElement("button")
+   paper.textContent = "Paper"
+   paper.addEventListener("click", () =>{
+    playRound("paper", getComputerChoice())
+   })
+   div.appendChild(paper)
+  
+   scissors = document.createElement("button")
+   scissors.textContent = "Scissors"
+   scissors.addEventListener("click", () =>{
+    playRound("scissors", getComputerChoice())
+   })
+   div.appendChild(scissors)
 }
 
 
 function playRound(humanChoice, computerChoice) {
-  console.log(humanChoice)
-  console.log(computerChoice)  
+/*     console.log(humanChoice) */
+    console.log("Computer chose " + computerChoice)
     if (humanChoice === "rock") {
         if (computerChoice === "paper") {
-            humanScore++
+            computerScore++
             console.log("You lose!") 
         }
         if (computerChoice === "scissors") {
-            computerScore++
+            humanScore++
             console.log("You win!")
         }
         if (computerChoice === "rock"){
@@ -60,24 +80,10 @@ function playRound(humanChoice, computerChoice) {
         if (computerChoice === "scissors"){
             console.log("Draw") 
         }
+        
     
     }
     }
-    
 
 
-
-
-
-
-
-playRound(getHumanChoice(), getComputerChoice())
-
-
-
-
-/* 
-
-console.log(getHumanChoice())
-
- */
+getHumanChoice()
