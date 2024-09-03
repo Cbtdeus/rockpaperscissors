@@ -2,9 +2,12 @@
 humanScore = 0
 computerScore = 0
 roundCount = 0
-const div = document.querySelector("div")
+const div = document.querySelector(".buttonDiv")
 const computerScoreDiv = document.querySelector(".computerScore")
 const humanScoreDiv = document.querySelector(".humanScore")
+const announcerDiv = document.querySelector(".announcerDiv")
+computerScoreDiv.innerText = ("Computer: " + computerScore)
+humanScoreDiv.innerText = ("You: " + humanScore)
 
 function getComputerChoice() {
     randomNumber = Math.random() * 3
@@ -21,12 +24,14 @@ function getHumanChoice() {
    rock.textContent = "Rock"
    rock.addEventListener("click", () =>{
     playRound("rock", getComputerChoice())
+    scoreUpdate()
    })
    div.appendChild(rock)
    paper = document.createElement("button")
    paper.textContent = "Paper"
    paper.addEventListener("click", () =>{
     playRound("paper", getComputerChoice())
+    scoreUpdate()
    })
    div.appendChild(paper)
   
@@ -34,56 +39,76 @@ function getHumanChoice() {
    scissors.textContent = "Scissors"
    scissors.addEventListener("click", () =>{
     playRound("scissors", getComputerChoice())
+    
+    scoreUpdate()
    })
    div.appendChild(scissors)
-}
+
+   }
+  
+   
+
 
 
 function playRound(humanChoice, computerChoice) {
 /*     console.log(humanChoice) */
-    console.log("Computer chose " + computerChoice)
+    
     if (humanChoice === "rock") {
         if (computerChoice === "paper") {
             computerScore++
-            console.log("You lose!") 
+            gameOutcome = ("You lose!") 
         }
         if (computerChoice === "scissors") {
             humanScore++
-            console.log("You win!")
+            gameOutcome = ("You win!")
         }
         if (computerChoice === "rock"){
-            console.log("Draw") 
+            gameOutcome = ("Draw") 
         }
     }
     if (humanChoice === "paper") {
         if (computerChoice === "paper"){
-            console.log("Draw") 
+            gameOutcome = ("Draw") 
         }
         if (computerChoice === "rock"){
             humanScore++
-            console.log("You win!") 
+            gameOutcome = ("You win!") 
     }
         if (computerChoice === "scissors"){
             computerScore++
-            console.log("You lose") 
+            gameOutcome = ("You lose") 
         }
     }
     if (humanChoice === "scissors"){
         if (computerChoice === "rock"){
             computerScore++
-            console.log("You lose")
+            gameOutcome = ("You lose")
         }
         if (computerChoice === "paper"){
             humanScore++
-            console.log("You win")
+            gameOutcome = ("You win")
         }
         if (computerChoice === "scissors"){
-            console.log("Draw") 
+            gameOutcome = ("Draw") 
         }
-        
     
     }
     }
+function scoreUpdate(){
+    computerScoreDiv.innerText = ("Computer: " + computerScore)
+    humanScoreDiv.innerText = ("You: " + humanScore)
+    announcerDiv.textContent = gameOutcome
+    if (humanScore === 5) {
+        computerScore = 0
+        humanScore = 0
+        announcerDiv.textContent = "You won!!!"
+       }
+       if (computerScore === 5){
+        computerScore = 0
+        humanScore = 0
+        announcerDiv.textContent = "You lost..."}
+}
+
 
 
 getHumanChoice()
